@@ -1,4 +1,8 @@
 <?php
+include_once '../utils/autoloader.php';
+include_once '../src/Mappers/Heros/HeroMapper.php';
+
+
 
 final class HeroesRepository extends AbstractRepository
 {
@@ -6,6 +10,10 @@ final class HeroesRepository extends AbstractRepository
     {
         parent::__construct();
     }
+
+
+
+    // BASE HERO
 
     public function FindAll(): array
     {
@@ -22,12 +30,14 @@ final class HeroesRepository extends AbstractRepository
     }
 
 
-
-    public function FindOne(string $name): ?BaseHero
+    // SELECTION HERO
+    public function FindOne(int $id): ?BaseHero
     {
-        $query = "SELECT * FROM hero WHERE name = :name";
+        $query = "SELECT * FROM hero WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
-        $stmt->execute(['name' => $name]);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
+
         $heroData = $stmt->fetch(PDO::FETCH_ASSOC);
 
 
@@ -39,14 +49,17 @@ final class HeroesRepository extends AbstractRepository
     }
 
 
-
-    public function saveHero(string $name): ?BaseHero
+// SAUVER HERO
+    public function saveHero(int $id): ?BaseHero
     {
-        $stmt = $this->pdo->prepare('INSERT INTO hero (name) VALUES (:name)');
-        $stmt->execute(['name' => $name]);
+        $query = 'INSERT INTO hero (id) VALUES (:id)';
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->execute();
 
-        $heroCreation = self::FindOne($name);
+        $heroCreation = self::FindOne($id);
 
         return $heroCreation;
     }
+
 }

@@ -31,6 +31,9 @@ spl_autoload_register(function ($className) {
             $directory = 'Entities';
             break;
     }
+    
+      // Remplacer les séparateurs de namespace par des séparateurs de répertoire
+      $className = str_replace('\\', '/', $className);
 
     // Construire le chemin complet du fichier
     $file = $baseDir . $directory . '/' . $className . '.php';
