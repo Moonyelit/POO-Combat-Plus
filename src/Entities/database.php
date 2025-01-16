@@ -1,6 +1,6 @@
 <?php
 
-final class Database
+class Database
 {
     private static ?PDO $pdo = null;
 
@@ -9,7 +9,7 @@ final class Database
         if (self::$pdo === null){
             try {
                 $host = "localhost";
-                $dbname = "pooCombatGame";
+                $dbname = "poo-combat-plus";
                 $login = "root";
                 $password = "";
 
