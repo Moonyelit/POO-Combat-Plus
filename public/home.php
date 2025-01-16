@@ -16,11 +16,19 @@ $new->FindAll();
 </head>
 <body>
     <h1>Choisir votre Héros</h1>
-    <form action="createHero.php" method="post">
+    <form action="../process/create_user_process.php" method="post" enctype="multipart/form-data">
+        <!-- Choisir son genre -->
+         <div>
+        <label for="gender-image">Genre:</label>
+        <input type="file" id="gender-image" name="gender-image" accept="image/" required>
+        </div>
+
+        <div>
         <label for="name">Nom du Héros:</label>
         <input type="text" id="name" name="name" required>
         <br><br>
         <input type="submit" value="Créer Héros">
+        </div>
     </form>
 
   
