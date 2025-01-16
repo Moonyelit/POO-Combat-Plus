@@ -1,0 +1,43 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+.hero-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+.hero {
+    position: relative;
+    margin: 20px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+.hero img {
+    width: 200px;
+    height: 300px;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border 0.3s ease;
+}
+.hero:hover img {
+    transform: scale(1.1);
+}
+.hero.selected img {
+    border: 2px solid #00f;
+    transform: scale(1.15);
+}
+.form-container {
+    margin-top: 30px;
+}
+.form-container input[type="text"] {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+}
+.form-container input[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
