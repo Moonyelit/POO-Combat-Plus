@@ -32,6 +32,7 @@ class ClasseHero
     }
 
     // Getters pour accéder aux boosts/malus
+    public function getId(): int { return $this->id; }
     public function getClasseName(): string { return $this->classeName; }
     public function getBoostPvMax(): int { return $this->boostPvMax; }
     public function getMalusMpMax(): int { return $this->malusMpMax; }

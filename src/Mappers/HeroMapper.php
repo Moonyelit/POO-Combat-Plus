@@ -2,21 +2,25 @@
 
 require_once '../utils/autoloader.php';
 
- class HeroMapper 
+class HeroMapper
 {
-   public static function mapToObject (array $dataHero): BaseHero
-   {
-    return new BaseHero(
-        $dataHero['id'],
-        $dataHero['nom'],
-        $dataHero['nom_perso'],
-        $dataHero['genre'],
-        $dataHero['PV'],
-        $dataHero['PVMax'],
-        $dataHero['MP'],
-        $dataHero['MPMax'],
-        $dataHero['force'],
-        $dataHero['defense'],
-    );
-   } 
+    public static function mapToObject(array $dataHero, ClasseHero $classeHero): BaseHero
+    {        $hero = new class(
+            $dataHero['id'],
+            $dataHero['nom'],
+            $dataHero['nom_perso'],
+            $dataHero['genre'],
+            $dataHero['PV'],
+            $dataHero['PVMax'],
+            $dataHero['MP'],
+            $dataHero['MPMax'],
+            $dataHero['FORCE'],
+            $dataHero['DEFENSE']
+        ) extends BaseHero {};
+
+        $hero->applyClassBoosts($classeHero);
+
+        return $hero;
+    }
+
 }
