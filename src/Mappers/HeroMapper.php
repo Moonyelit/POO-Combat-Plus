@@ -16,7 +16,6 @@ require_once '../utils/autoloader.php';
         $dataHero['MPMax'],
         $dataHero['force'],
         $dataHero['defense'],
-        $dataHero['sprite']
     );
    } 
 }

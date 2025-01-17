@@ -1,6 +1,6 @@
 <?php
 
-class Database
+final class Database
 {
     private static ?PDO $pdo = null;
 

@@ -1,6 +1,6 @@
 <?php 
 
-abstract class BaseHero 
+ class BaseHero 
 {
     protected int $id;
     protected string $nom;
@@ -11,7 +11,6 @@ abstract class BaseHero
     protected int $MPMax;
     protected int $force;
     protected int $defense;
-    protected string $sprite; 
 
     // Mon constructeur
     protected function __construct(
@@ -24,7 +23,7 @@ abstract class BaseHero
         int $MPMax = 100, 
         int $force = 10, 
         int $defense = 10,      
-        string $sprite
+
 
     ) {
         $this->id = $id;
@@ -36,7 +35,20 @@ abstract class BaseHero
         $this->MPMax = $MPMax;
         $this->force = $force;
         $this->defense = $defense;
-        $this->sprite = $sprite;
+        // $this->classe = $classe;
+
+
+        // if($this->classe === 'Guerrier') {
+        //     $this->force += 5;
+        //     $this->defense += 5;
+        // } elseif($this->classe === 'Mage') {
+        //     $this->MP += 50;
+        //     $this->MPMax += 50;
+        // } elseif($this->classe === 'Voleur') {
+        //     $this->force += 2;
+        //     $this->defense += 2;
+        // }   
+
     }
 
     // Getters
@@ -77,7 +89,6 @@ abstract class BaseHero
 
     public function getSprite(): string 
     {
-        return $this->sprite;
     }
 
     // Setters
@@ -117,9 +128,5 @@ abstract class BaseHero
         return $this;
     }
 
-    public function setSprite(string $sprite): self 
-    {
-        $this->sprite = $sprite;
-        return $this;
-    }
+
 }

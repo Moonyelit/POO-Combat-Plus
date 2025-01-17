@@ -1,6 +1,6 @@
 <?php 
 
-abstract class ClasseHero extends BaseHero
+class ClasseCreate 
 {
     protected int $id;
     protected string $classeName;

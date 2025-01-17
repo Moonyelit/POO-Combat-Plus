@@ -1,6 +1,6 @@
 <?php
 
-class Genre extends BaseHero
+final class Genre
 {
     private int $id;
     private string $genre;
