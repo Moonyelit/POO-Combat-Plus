@@ -27,16 +27,25 @@ spl_autoload_register(function ($className) {
         case substr($className, -5) === 'Trait':
             $directory = 'Traits';
             break;
-        case substr($className, -4) === 'Hero':
-            $directory = 'Entities/Hero';
-            break;
         default:
             $directory = 'Entities';
             break;
+
+
+            
+        case substr($className, -4) === 'Hero':
+            $directory = 'Entities/Hero';
+            break;
+        case substr($className, -4) === 'Hero':
+            $directory = 'Mappers/Hero';
+            break;
+        case substr($className, -4) === 'Hero':
+            $directory = 'Repositories/Hero';
+            break;
     }
-    
-      // Remplacer les séparateurs de namespace par des séparateurs de répertoire
-      $className = str_replace('\\', '/', $className);
+
+    // Remplacer les séparateurs de namespace par des séparateurs de répertoire
+    $className = str_replace('\\', '/', $className);
 
     // Construire le chemin complet du fichier
     $file = $baseDir . $directory . '/' . $className . '.php';

@@ -6,10 +6,11 @@ require_once '../utils/autoloader.php';
 {
    public static function mapToObject (array $dataHero): BaseHero
    {
-    return new HeroEntity(
+    return new BaseHero(
         $dataHero['id'],
         $dataHero['nom'],
         $dataHero['nom_perso'],
+        $dataHero['genre'],
         $dataHero['PV'],
         $dataHero['PVMax'],
         $dataHero['MP'],
