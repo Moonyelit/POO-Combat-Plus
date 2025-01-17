@@ -21,21 +21,26 @@ final class HeroesRepository extends AbstractRepository
         hero.PV,
         hero.PVMax,
         hero.MP,
-        hero.MPMax,
+        hero.PMMax,  
         hero.FORCE,
         hero.DEFENSE,
         hero_classe.id AS classe_id,
         hero_classe.classe_name,
-        hero_classe.boostPvMax,
-        hero_classe.malusMpMax,
-        hero_classe.boostForce,
-        hero_classe.malusForce,
-        hero_classe.boostDefense,
-        hero_classe.malusDefense
-    FROM 
+        hero_classe.boost_pvmax,
+        hero_classe.malus_pvmax,
+        hero_classe.boost_mpmax,
+        hero_classe.malus_mpmax,
+        hero_classe.boost_force,
+        hero_classe.malus_force,
+        hero_classe.boost_defense,
+        hero_classe.malus_defense,
+        hero_classe.description
+FROM 
         hero
-    JOIN 
+JOIN 
         hero_classe ON hero.id_hero_classe = hero_classe.id
+LIMIT 0, 25;
+
 ";
         $stmt = $this->pdo->query($query);
         $heroDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -44,14 +49,18 @@ final class HeroesRepository extends AbstractRepository
         foreach ($heroDatas as $heroData) {
 
             $classeHero = new ClasseHero(
+                
                 $heroData['classe_id'],
                 $heroData['classe_name'],
-                $heroData['boostPvMax'],
-                $heroData['malusMpMax'],
-                $heroData['boostForce'],
-                $heroData['malusForce'],
-                $heroData['boostDefense'],
-                $heroData['malusDefense']
+                $heroData['boost_pvmax'] ?? 0,
+                $heroData['malus_pvmax'] ?? 0,
+                $heroData['boost_mpmax'] ?? 0,
+                $heroData['malus_mpmax'] ?? 0,
+                $heroData['boost_force'] ?? 0,
+                $heroData['malus_force'] ?? 0,
+                $heroData['boost_defense'] ?? 0,
+                $heroData['malus_defense'] ?? 0,
+                $heroData['description'] ?? ''
             );
 
             $heroes[] = HeroMapper::mapToObject($heroData, $classeHero);
@@ -92,17 +101,17 @@ final class HeroesRepository extends AbstractRepository
             WHERE 
                 hero.id = :id
         ";
-    
+
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
-    
+
         $heroData = $stmt->fetch(PDO::FETCH_ASSOC);
-    
+
         if (!$heroData) {
             return null; // Aucun héros trouvé
         }
-    
+
         // Créer l'objet ClasseHero
         $classeHero = new ClasseHero(
             $heroData['classe_id'],
@@ -114,11 +123,11 @@ final class HeroesRepository extends AbstractRepository
             $heroData['boostDefense'],
             $heroData['malusDefense']
         );
-    
+
         // Mapper les données pour créer l'objet Hero
         return HeroMapper::mapToObject($heroData, $classeHero);
     }
-    
+
 
 
     // SAUVER HERO

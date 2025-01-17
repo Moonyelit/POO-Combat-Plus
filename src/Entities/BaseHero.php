@@ -15,7 +15,7 @@
     protected ?string $classeName = null;
 
     // Mon constructeur
-    protected function __construct(
+    public function __construct(
         int $id,
         string $nom, 
         string $nomPerso,
