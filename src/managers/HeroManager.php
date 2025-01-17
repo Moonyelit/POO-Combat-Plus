@@ -43,4 +43,5 @@ class Hero
         $this->hero = $hero;
     }
 
+    // Ajoutez des getters pour accéder aux propriétés si nécessaire
 }

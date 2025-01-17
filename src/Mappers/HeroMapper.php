@@ -2,11 +2,11 @@
 
 require_once '../utils/autoloader.php';
 
-abstract class HeroMapper 
+ class HeroMapper 
 {
    public static function mapToObject (array $dataHero): BaseHero
    {
-    return new BaseHero(
+    return new HeroEntity(
         $dataHero['id'],
         $dataHero['nom'],
         $dataHero['nom_perso'],

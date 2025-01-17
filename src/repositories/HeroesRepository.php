@@ -1,6 +1,5 @@
 <?php
 include_once '../utils/autoloader.php';
-include_once '../src/Mappers/Heros/HeroMapper.php';
 
 
 
