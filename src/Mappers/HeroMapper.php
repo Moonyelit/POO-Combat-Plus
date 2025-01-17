@@ -8,8 +8,7 @@ class HeroMapper
     {
         $hero = new class(
             $dataHero['id'] ?? 0,
-            $dataHero['nom'] ?? '',
-            $dataHero['nom_perso'] ?? '',
+            $dataHero['hero_nom'] ?? '',
             $dataHero['genre'] ?? '',
             $dataHero['PV'] ?? 0,
             $dataHero['PVMax'] ?? 0,

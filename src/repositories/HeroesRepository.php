@@ -16,7 +16,6 @@ final class HeroesRepository extends AbstractRepository
         $query =  "SELECT 
         hero.id AS hero_id,
         hero.nom AS hero_nom,
-        hero.nom_perso,
         hero.genre,
         hero.PV,
         hero.PVMax,
@@ -49,7 +48,7 @@ LIMIT 0, 25;
         foreach ($heroDatas as $heroData) {
 
             $classeHero = new ClasseHero(
-                
+
                 $heroData['classe_id'],
                 $heroData['classe_name'],
                 $heroData['boost_pvmax'] ?? 0,
@@ -78,7 +77,6 @@ LIMIT 0, 25;
             SELECT 
                 hero.id AS hero_id,
                 hero.nom AS hero_nom,
-                hero.nom_perso,
                 hero.genre,
                 hero.PV,
                 hero.PVMax,
@@ -88,12 +86,15 @@ LIMIT 0, 25;
                 hero.DEFENSE,
                 hero_classe.id AS classe_id,
                 hero_classe.classe_name,
-                hero_classe.boostPvMax,
-                hero_classe.malusMpMax,
-                hero_classe.boostForce,
-                hero_classe.malusForce,
-                hero_classe.boostDefense,
-                hero_classe.malusDefense
+                hero_classe.boost_pvmax,
+                hero_classe.malus_pvmax,
+                hero_classe.boost_mpmax,
+                hero_classe.malus_mpmax,
+                hero_classe.boost_force,
+                hero_classe.malus_force,
+                hero_classe.boost_defense,
+                hero_classe.malus_defense,
+                hero_classe.description
             FROM 
                 hero
             JOIN 
@@ -116,12 +117,15 @@ LIMIT 0, 25;
         $classeHero = new ClasseHero(
             $heroData['classe_id'],
             $heroData['classe_name'],
-            $heroData['boostPvMax'],
-            $heroData['malusMpMax'],
+            $heroData['boost_pvmax'],
+            $heroData['malus_pvmax'],
+            $heroData['boost_mpmax'],
+            $heroData['malus_mpmax'],
             $heroData['boostForce'],
             $heroData['malusForce'],
             $heroData['boostDefense'],
-            $heroData['malusDefense']
+            $heroData['malusDefense'],
+            $heroData['description'] ?? ''
         );
 
         // Mapper les données pour créer l'objet Hero
