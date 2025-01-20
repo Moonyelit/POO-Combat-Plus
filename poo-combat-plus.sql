@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 20 jan. 2025 à 10:39
+-- Généré le : lun. 20 jan. 2025 à 12:36
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -24,6 +24,23 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `choix_hero`
+--
+
+DROP TABLE IF EXISTS `choix_hero`;
+CREATE TABLE IF NOT EXISTS `choix_hero` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `id_joueur` int NOT NULL,
+  `id_hero` int NOT NULL,
+  `nom_personnalise` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk_choix_hero_joueur` (`id_joueur`),
+  KEY `fk_choix_hero_hero` (`id_hero`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `hero`
 --
 
@@ -35,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `hero` (
   `PV` int NOT NULL DEFAULT '100' COMMENT 'Points de vie du héros',
   `PVMax` int NOT NULL COMMENT 'PV Max du héros',
   `MP` int NOT NULL DEFAULT '50' COMMENT 'Points de mana',
-  `PMMax` int NOT NULL COMMENT 'MP Max du héros',
+  `MPMax` int NOT NULL,
   `FORCE` int NOT NULL DEFAULT '10' COMMENT 'Force du héros',
   `DEFENSE` int NOT NULL DEFAULT '5' COMMENT 'Défense du héros',
   `id_hero_classe` int UNSIGNED DEFAULT NULL COMMENT 'Classe du héros (référence à hero_classe)',
@@ -48,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `hero` (
 -- Déchargement des données de la table `hero`
 --
 
-INSERT INTO `hero` (`id`, `nom`, `genre`, `PV`, `PVMax`, `MP`, `PMMax`, `FORCE`, `DEFENSE`, `id_hero_classe`) VALUES
+INSERT INTO `hero` (`id`, `nom`, `genre`, `PV`, `PVMax`, `MP`, `MPMax`, `FORCE`, `DEFENSE`, `id_hero_classe`) VALUES
 (1, 'Riou', '1', 100, 100, 50, 50, 10, 5, 1),
 (2, 'Nanami', '2', 100, 100, 50, 50, 10, 5, 1);
 
@@ -93,7 +110,7 @@ INSERT INTO `hero_classe` (`id`, `classe_name`, `boost_pvmax`, `malus_pvmax`, `b
 DROP TABLE IF EXISTS `joueur`;
 CREATE TABLE IF NOT EXISTS `joueur` (
   `id` int NOT NULL,
-  `nom` varchar(15) NOT NULL COMMENT 'Nom du joueur'
+  `nom` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Nom du joueur'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
