@@ -1,14 +1,6 @@
-<?php
-require_once '../utils/autoloader.php';
-
-$heroesRepository = new HeroesRepository();
-$heroes = $heroesRepository->findAll();
-
-var_dump($heroes);
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,33 +8,25 @@ var_dump($heroes);
     <link rel="stylesheet" href="../public/components/css/home.css">
     <script src="../public/components/javascript/home.js"></script>
 </head>
+
 <body>
-    
-<h1>Choisissez votre héros</h1>
-    <form method="post" class="hero-container">
-        <!-- Riou -->
-        <div id="Riou" class="hero" onclick="selectHero('Riou')">
-            <img src="./assets/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
+
+    <header>
+        <div id="Logo" class="Logo">
+            <img src="./assets/images/Suikoden_II_Logo.svg.png" alt="Riou">
         </div>
+    </header>
 
-        <!-- Nanami -->
-        <div id="Nanami" class="hero" onclick="selectHero('Nanami')">
-            <img src="./assets/images/Hero/HERO-Nanami-Suikoden.png" alt="Nanami">
-        </div>
+    <main>
+        <!-- Formulaire pour entrez son pseudo -->
+        <form action="URL redirection" method="post" class="form-container">
+            <label for="pseudo_choice">Entrez votre pseudo :</label>
+            <input type="text" id="pseudo_choice" name="pseudo" required>
+            <br>
+            <input type="submit" value="Valider">
+        </form>
 
-        <!-- Champ caché pour transmettre le héros sélectionné -->
-        <input type="hidden" name="hero" id="selected-hero" value="">
-    </form>
-
-    <!-- Formulaire pour renommer le héros -->
-    <form action="URL redirection" method="post" class="form-container">
-        <label for="hero-name">Renommez votre héros :</label>
-        <input type="text" id="hero-name" name="hero_name"" required>
-        <br>
-        <input type="submit" value="Valider">
-    </form>
-
-
-  
+    </main>
 </body>
+
 </html>

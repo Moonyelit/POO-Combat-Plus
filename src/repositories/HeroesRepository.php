@@ -19,7 +19,7 @@ final class HeroesRepository extends AbstractRepository
         hero.PV,
         hero.PVMax,
         hero.MP,
-        hero.PMMax,  
+        hero.MPMax,  
         hero.FORCE,
         hero.DEFENSE,
         hero_classe.id AS classe_id,
