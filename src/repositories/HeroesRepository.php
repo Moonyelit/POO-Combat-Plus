@@ -9,7 +9,6 @@ final class HeroesRepository extends AbstractRepository
 
 
     // BASE HERO AVEC SA CLASSE
-
     public function FindAll(): array
     {
 
