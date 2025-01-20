@@ -15,12 +15,12 @@
     <form method="post" class="hero-container">
         <!-- Riou -->
         <div id="Riou" class="hero" onclick="selectHero('Riou')">
-            <img src="components/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
+            <img src="./assets/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
         </div>
 
         <!-- Nanami -->
         <div id="Nanami" class="hero" onclick="selectHero('Nanami')">
-            <img src="components/images/Hero/HERO-Nanami-Suikoden.png" alt="Nanami">
+            <img src="./assets/images/Hero/HERO-Nanami-Suikoden.png" alt="Nanami">
         </div>
 
         <!-- Champ caché pour transmettre le héros sélectionné -->
