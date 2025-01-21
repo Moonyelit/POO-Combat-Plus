@@ -13,7 +13,7 @@
 
     <header>
         <div id="Logo" class="Logo">
-            <img src="./assets/images/Suikoden_II_Logo.svg.png" alt="Riou">
+            <img src="./assets/images/Suikoden_II_Logo.svg.png" alt="Logo avec marqué SUikoden II">
         </div>
     </header>
 
