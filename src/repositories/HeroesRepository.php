@@ -44,6 +44,10 @@ LIMIT 0, 25;
         $heroDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $heroes = [];
 
+        if(empty($heroDatas)){
+            die("Aucun héros récupéré depuis la base de données.");
+        }
+
         foreach ($heroDatas as $heroData) {
 
             $classeHero = new ClasseHero(

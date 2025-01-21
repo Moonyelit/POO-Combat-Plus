@@ -1,8 +1,11 @@
-<?php require_once '../process/auth_check.php'; 
+<?php
+session_start();
 
-var_dump($_SESSION);
-$heroes = $_SESSION['heroes'] ?? [];
-
+// Vérification de la session
+if (!isset($_SESSION['heroes']) || empty($_SESSION['heroes'])) {
+    header('Location: ../process/choice_hero_process.php');
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,14 +22,14 @@ $heroes = $_SESSION['heroes'] ?? [];
 <h1>Choisissez votre héros</h1>
 
 <div class="hero-container">
-    <?php var_dump($heroes);
- foreach ($heroes as $hero): ?>
-        <div id="<?= $hero->getNom(); ?>" class="hero" onclick="selectHero('<?= $hero->getNom(); ?>', '<?= $hero->getId(); ?>')">
-        <img src="assets/images/Hero/HERO-<?= $hero->getNom(); ?>-Suikoden.png" alt="<?= $hero->getNom(); ?>">
+    <?php 
+    $heroes = $_SESSION['heroes'];
+    foreach ($heroes as $hero): ?>
+        <div id="<?= $hero['nom']; ?>" class="hero" onclick="selectHero('<?= $hero['nom']; ?>', '<?= $hero['id']; ?>')">
+            <img src="assets/images/Hero/HERO-<?= $hero['nom']; ?>-Suikoden.png" alt="<?= $hero['nom']; ?>">
         </div>
     <?php endforeach; ?>
 </div>
-
 
 <form action="../process/create_user_process.php" method="post" class="form-container">
     <input type="hidden" name="hero_id" id="selected-hero" value="">

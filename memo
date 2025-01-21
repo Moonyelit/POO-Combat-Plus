@@ -1,17 +1,12 @@
 
 <?php
-include_once '../utils/autoloader.php';  
+require_once '../utils/autoloader.php';
 
+$heroesRepository = new HeroesRepository();
+$heroes = $heroesRepository->findAll();
 
-// $heroesRepository = new HeroesRepository();
-
-// $heroes = $heroesRepository->FindAll();
-
-// var_dump($heroes);
-
-// ?>
-
-
+var_dump($heroes);
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -19,7 +14,7 @@ include_once '../utils/autoloader.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un Héros</title>
-    <link rel="stylesheet" href="../public/components/css/home.css">
+    <link rel="stylesheet" href="../public/components/css/choiceHome.css">
     <script src="../public/components/javascript/home.js"></script>
 </head>
 <body>
@@ -28,12 +23,12 @@ include_once '../utils/autoloader.php';
     <form method="post" class="hero-container">
         <!-- Riou -->
         <div id="Riou" class="hero" onclick="selectHero('Riou')">
-            <img src="components/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
+            <img src="./assets/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
         </div>
 
         <!-- Nanami -->
         <div id="Nanami" class="hero" onclick="selectHero('Nanami')">
-            <img src="components/images/Hero/HERO-Nanami-Suikoden.png" alt="Nanami">
+            <img src="./assets/images/Hero/HERO-Nanami-Suikoden.png" alt="Nanami">
         </div>
 
         <!-- Champ caché pour transmettre le héros sélectionné -->
@@ -41,7 +36,7 @@ include_once '../utils/autoloader.php';
     </form>
 
     <!-- Formulaire pour renommer le héros -->
-    <form method="post" class="form-container">
+    <form action="URL redirection" method="post" class="form-container">
         <label for="hero-name">Renommez votre héros :</label>
         <input type="text" id="hero-name" name="hero_name"" required>
         <br>
@@ -52,4 +47,3 @@ include_once '../utils/autoloader.php';
   
 </body>
 </html>
-

@@ -38,7 +38,9 @@ abstract class BaseHero extends Character
     public function getNom(): string { return $this->nom; }
     public function getGenre(): string { return $this->genre; }
     public function getPV(): int { return $this->PV; }
+    public function getPVMax(): int { return $this->PVMax; }
     public function getMP(): int { return $this->MP; }
+    public function getMPMax(): int { return $this->MPMax; }
     public function getForce(): int { return $this->force; }
     public function getDefense(): int { return $this->defense; }
     public function getClasseName(): ?string { return $this->classeName; }
