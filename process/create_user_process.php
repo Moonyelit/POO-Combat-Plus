@@ -3,40 +3,42 @@ require_once '../utils/autoloader.php';
 
 session_start();
 
-$pseudo = $_SESSION['pseudo_temp'] ?? null;
+$pseudo = $_SESSION['pseudo'] ?? null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_name'], $_POST['hero'])) {
+if (!$pseudo) {
+    $_SESSION['error'] = 'Veuillez vous connecter.';
+    header('Location: ../public/home.php');
+    exit;
+}
+
+// Vérification de la soumission du formulaire
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['hero_name'])) {
+    $heroId = (int) $_POST['hero_id'];
     $nomHero = trim($_POST['hero_name']);
-    $selectedHero = trim($_POST['hero']);
 
-    if ($pseudo && $nomHero && $selectedHero) {
+    if ($heroId && $nomHero) {
         $joueurRepo = new JoueurRepository();
         $choixHeroRepo = new ChoixHeroRepository();
 
-        // Vérifier si le pseudo existe déjà pour éviter de dupliquer les comptes
-        $existingJoueur = $joueurRepo->findByPseudo($pseudo);
+        // Récupérer l'ID du joueur en session
+        $joueurId = $_SESSION['joueur_id'];
 
-        if ($existingJoueur) {
-            $_SESSION['.error'] = 'Ce pseudo existe déjà, veuillez en choisir un autre';
-            header('Location: ../public/home.php');
+        // Vérification si le joueur a déjà un héros associé
+        $existingChoice = $choixHeroRepo->findByJoueurId($joueurId);
+        if ($existingChoice) {
+            $_SESSION['error'] = 'Vous avez déjà un héros.';
+            header('Location: ../public/homePlayer.php');
             exit;
         }
 
-        // Insérer le joueur dans la base de données
-        $joueurId = $joueurRepo->create($pseudo);
+        // Enregistrer le choix du héros pour ce joueur
+        $choixHeroRepo->createChoixHero($joueurId, $heroId, $nomHero);
 
-        // Associer le joueur au héros choisi
-        $choixHero = $choixHeroRepo->createChoixHero($joueurId, $selectedHero, $nomHero);
-
-        // Enregistrer les informations en session
-        $_SESSION['joueur_id'] = $joueurId;
-        $_SESSION['pseudo'] = $pseudo;
-
-        // Redirection vers la page joueur
+        $_SESSION['message'] = 'Héros enregistré avec succès!';
         header('Location: ../public/homePlayer.php');
         exit;
     } else {
-        $_SESSION['error'] = 'Veuillez sélectionner un héros et renseigner un nom valide.';
+        $_SESSION['error'] = 'Veuillez sélectionner un héros et donner un nom.';
         header('Location: ../public/choiceHero.php');
         exit;
     }

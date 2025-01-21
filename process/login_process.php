@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../public/choiceHero.php');
             exit;
         } else {
-            $_SESSION['error'] = 'Erreur lors de la création du joueur.';
+            $_SESSION['error'] = 'Erreur lors de la création du joueur. Veuillez réessayer.';
             header('Location: ../public/home.php');
             exit;
         }

@@ -21,13 +21,20 @@ final class JoueurRepository extends AbstractRepository
         return JoueurMapper::mapToObject($dataJoueur);
     }
 
-    public function create(string $pseudo): int
+    public function create(string $pseudo): ?int
     {
-        $query = "INSERT INTO joueur (pseudo) VALUES (:pseudo)";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':pseudo', $pseudo);
-        $stmt->execute();
-
-        return $this->pdo->lastInsertId();
+        try {
+            $query = "INSERT INTO joueur (pseudo) VALUES (:pseudo)";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':pseudo', $pseudo, PDO::PARAM_STR);
+    
+            if ($stmt->execute()) {
+                return (int)$this->pdo->lastInsertId();
+            }
+            return null;
+        } catch (PDOException $e) {
+            error_log("Erreur lors de l'insertion du joueur : " . $e->getMessage());
+            return null;
+        }
     }
-}
+}    
