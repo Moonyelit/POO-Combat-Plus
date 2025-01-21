@@ -1,4 +1,6 @@
 <?php require_once '../process/auth_check.php'; 
+
+var_dump($_SESSION);
 $heroes = $_SESSION['heroes'] ?? [];
 
 ?>
@@ -20,7 +22,7 @@ $heroes = $_SESSION['heroes'] ?? [];
     <?php var_dump($heroes);
  foreach ($heroes as $hero): ?>
         <div id="<?= $hero->getNom(); ?>" class="hero" onclick="selectHero('<?= $hero->getNom(); ?>', '<?= $hero->getId(); ?>')">
-        <img src="./assets/images/Hero/HERO-<?= $hero->getNom(); ?>-Suikoden.png" alt="<?= $hero->getNom(); ?>">
+        <img src="assets/images/Hero/HERO-<?= $hero->getNom(); ?>-Suikoden.png" alt="<?= $hero->getNom(); ?>">
         </div>
     <?php endforeach; ?>
 </div>
