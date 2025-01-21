@@ -23,12 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['joueur_id'] = $joueur->getId();
         $_SESSION['pseudo'] = $joueur->getPseudo();
 
-        header('Location: ../public/homePlayer.php');
-        exit;
-    } else {
-        // Si le joueur n'existe pas, redirection vers la création d'un héros
-        $_SESSION['error'] = 'Pseudo introuvable. Veuillez créer un héros.';
-        header('Location: ../public/choiceHero.php');
-        exit;
+        $choixHeroRepository = new ChoixHeroRepository();
+        $choixHero = $choixHeroRepository->findByJoueurId($joueur->getId());
+
+        if($choixHero){
+            //joueur avec déjà un héro enregistré
+            header('Location: ../public/homePlayer.php');
+            exit;
+        } else {
+            //joueur sans héro enregistré
+            header('Location: ../public/choiceHero.php');
+            exit;
+        }
+
     }
 }

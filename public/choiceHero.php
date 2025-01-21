@@ -1,10 +1,8 @@
 <?php
-require_once '../utils/autoloader.php';
 
-$heroesRepository = new HeroesRepository();
-$heroes = $heroesRepository->findAll();
+session_start();
 
-var_dump($heroes);
+$pseudo = $_SESSION['pseudo_temp'] ??null;
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +17,7 @@ var_dump($heroes);
 <body>
     
 <h1>Choisissez votre héros</h1>
-    <form method="post" class="hero-container">
+    <form action="../process/create_user_process.php" method="post" class="hero-container">
         <!-- Riou -->
         <div id="Riou" class="hero" onclick="selectHero('Riou')">
             <img src="./assets/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
@@ -35,7 +33,7 @@ var_dump($heroes);
     </form>
 
     <!-- Formulaire pour renommer le héros -->
-    <form action="URL redirection" method="post" class="form-container">
+    <form action="../public/fight.php" method="post" class="form-container">
         <label for="hero-name">Renommez votre héros :</label>
         <input type="text" id="hero-name" name="hero_name"" required>
         <br>
