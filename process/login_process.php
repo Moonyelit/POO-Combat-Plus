@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $choixHero = $choixHeroRepository->findByJoueurId($joueur->getId());
 
         if ($choixHero) {
-            header('Location: ../public/fight.php');
+            header('Location: ../public/homePlayer.php');
             exit;
         } else {
             header('Location: ../public/choiceHero.php');

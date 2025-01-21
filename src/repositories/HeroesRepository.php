@@ -9,7 +9,6 @@ final class HeroesRepository extends AbstractRepository
     // Récupère tous les héros avec leur classe
     public function FindAll(): array
     {
-
         $query =  "SELECT 
         hero.id AS hero_id,
         hero.nom AS hero_nom,
@@ -31,13 +30,12 @@ final class HeroesRepository extends AbstractRepository
         hero_classe.boost_defense,
         hero_classe.malus_defense,
         hero_classe.description
-FROM 
+        FROM 
         hero
-JOIN 
+        JOIN 
         hero_classe ON hero.id_hero_classe = hero_classe.id
-LIMIT 0, 25;
+        LIMIT 0, 25;";
 
-";
         $stmt = $this->pdo->query($query);
         $heroDatas = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $heroes = [];
@@ -47,9 +45,7 @@ LIMIT 0, 25;
         }
 
         foreach ($heroDatas as $heroData) {
-
             $classeHero = new ClasseHero(
-
                 $heroData['classe_id'],
                 $heroData['classe_name'],
                 $heroData['boost_pvmax'] ?? 0,
@@ -104,6 +100,7 @@ LIMIT 0, 25;
         ";
 
         $stmt = $this->pdo->prepare($query);
+        // attention a ca
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
 

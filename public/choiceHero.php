@@ -1,6 +1,7 @@
 <?php 
-require_once '../process/auth_check.php'; 
+require_once '../process/choice_hero_process.php'; 
 
+$heroes = new ChoixHeroRepository();
 $heroes = $_SESSION['heroes'] ?? [];
 
 ?>
@@ -28,11 +29,12 @@ $heroes = $_SESSION['heroes'] ?? [];
     <?php endforeach; ?>
 </div>
 
-<form action="../process/create_user_process.php" method="post" class="form-container">
+<form action="../process/choice_hero_process.php" method="post" class="form-container">
     <input type="hidden" name="hero_id" id="selected-hero-id" value="">
     <label for="hero-name">Renommez votre héros :</label>
     <input type="text" id="hero-name" name="hero_name" placeholder="Choisissez un nom" required>
     <br>
+<?php var_dump($heroes) ?>
     <input type="submit" value="Valider">
 </form>
 

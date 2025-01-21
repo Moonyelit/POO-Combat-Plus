@@ -1,53 +1,45 @@
 <?php
+session_start();
 require_once '../utils/autoloader.php';
 
-session_start();
-
-$pseudo = $_SESSION['pseudo'] ?? null;
-
-if (!$pseudo) {
-    $_SESSION['error'] = 'Veuillez vous connecter.';
-    header('Location: ../public/home.php');
-    exit;
-}
-
-// Vérification de la soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['hero_name'])) {
+
     $heroId = (int) $_POST['hero_id'];
-    $nomHero = trim($_POST['hero_name']);
+    $heroName = trim($_POST['hero_name']);
+    $joueurId = $_SESSION['joueur_id'] ?? null;
 
-    if ($heroId && !empty($nomHero)) {
-        $joueurRepo = new JoueurRepository();
-        $choixHeroRepo = new ChoixHeroRepository();
-
-        // Récupérer l'ID du joueur en session
-        $joueurId = $_SESSION['joueur_id'] ?? null;
-
-        if (!$joueurId) {
-            $_SESSION['error'] = 'Erreur: Joueur non trouvé.';
-            header('Location: ../public/home.php');
-            exit;
-        }
-
-        // Vérification si le joueur a déjà un héros associé
-        $existingChoice = $choixHeroRepo->findByJoueurId($joueurId);
-        if ($existingChoice) {
-            $_SESSION['error'] = 'Vous avez déjà un héros.';
-            header('Location: ../public/fight.php');
-            exit;
-        }
-
-        // Enregistrer le choix du héros pour ce joueur
-        $choixHeroRepo->createChoixHero($joueurId, $heroId, $nomHero);
-
-        $_SESSION['message'] = 'Héros enregistré avec succès!';
-        header('Location: ../public/fight.php');
-        exit;
-    } else {
+    // Vérification des données reçues
+    if (!$joueurId || $heroId <= 0 || empty($heroName)) {
         $_SESSION['error'] = 'Veuillez sélectionner un héros et donner un nom.';
         header('Location: ../public/choiceHero.php');
         exit;
     }
+
+    // Limitation aux héros autorisés (Riou = 1, Nanami = 2)
+    $allowedHeroes = [1, 2];
+    if (!in_array($heroId, $allowedHeroes)) {
+        $_SESSION['error'] = 'Le héros sélectionné n\'est pas valide.';
+        header('Location: ../public/choiceHero.php');
+        exit;
+    }
+
+    $choixHeroRepo = new ChoixHeroRepository();
+    
+    // Vérification si un héros est déjà enregistré pour ce joueur
+    $existingChoice = $choixHeroRepo->findByJoueurId($joueurId);
+
+    if ($existingChoice) {
+        $_SESSION['message'] = 'Vous avez déjà un héros enregistré.';
+        header('Location: ../public/homePlayer.php');
+        exit;
+    }
+
+    // Insérer le choix du héros
+    $choixHeroRepo->createChoixHero($joueurId, $heroId, $heroName);
+
+    $_SESSION['message'] = 'Héros enregistré avec succès!';
+    header('Location: ../public/homePlayer.php');
+    exit;
 } else {
     $_SESSION['error'] = 'Requête invalide.';
     header('Location: ../public/home.php');

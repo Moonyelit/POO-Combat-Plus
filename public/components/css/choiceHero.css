@@ -42,14 +42,11 @@ h1 {
 }
 
 .hero {
-    display: flex;
     border: 2px solid #5c8554;
     background-color: rgba(255, 255, 255, 0.4);
     padding: 1rem;
     cursor: pointer;
     border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
     transition: transform 0.5s, border-color 0.3s;
 }
 
@@ -64,6 +61,11 @@ h1 {
 }
 
 .hero:hover {
+    transform: scale(1.1);
+    border-color: #171b2c;
+}
+
+.hero:hover, .hero.selected {
     transform: scale(1.1);
     border-color: #171b2c;
 }

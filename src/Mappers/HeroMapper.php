@@ -6,7 +6,7 @@ class HeroMapper
     public static function mapToObject(array $dataHero, ClasseHero $classeHero): BaseHero
     {
         $hero = new class(
-            $dataHero['id'] ?? 0,
+            $dataHero['hero_id'] ?? 0,
             $dataHero['hero_nom'] ?? '',
             $dataHero['genre'] ?? '',
             $dataHero['PV'] ?? 0,

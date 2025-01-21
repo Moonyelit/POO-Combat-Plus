@@ -46,9 +46,12 @@ abstract class BaseHero extends Character
     public function getClasseName(): ?string { return $this->classeName; }
 
     // Setters
+    public function setId(int $id): self { $this->id = $id; return $this; }
     public function setNom(string $nom): self { $this->nom = $nom; return $this; }
     public function setPV(int $PV): self { $this->PV = $PV; return $this; }
+    public function setPVMax(int $PVMax): self { $this->PVMax = $PVMax; return $this; }
     public function setMP(int $MP): self { $this->MP = $MP; return $this; }
+    public function setMPMax(int $MPMax): self { $this->MPMax = $MPMax; return $this; }
     public function setForce(int $force): self { $this->force = $force; return $this; }
     public function setDefense(int $defense): self { $this->defense = $defense; return $this; }
 }

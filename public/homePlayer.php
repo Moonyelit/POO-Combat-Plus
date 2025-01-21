@@ -15,6 +15,18 @@ if (!$hero) {
     exit;
 }
 
-echo "<h1>Bienvenue, " . $_SESSION['pseudo'] . "</h1>";
-echo "<p>Votre héros : " . $hero->getNomPersonnalise() . "</p>";
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Héros</title>
+</head>
+<body>
+    <h1>Bienvenue, <?= htmlspecialchars($_SESSION['pseudo']) ?></h1>
+    <p>Votre héros : <?= htmlspecialchars($hero->getNomPersonnalise()) ?></p>
+    <img src="./assets/images/Hero/HERO-<?= htmlspecialchars($hero->getNomPersonnalise()) ?>-Suikoden.png" alt="<?= htmlspecialchars($hero->getNomPersonnalise()) ?>">
+</body>
+</html>
