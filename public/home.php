@@ -1,3 +1,13 @@
+<?php
+session_start();
+if (isset($_SESSION['error'])) {
+    echo '<p style="color:red;">' . $_SESSION['error'] . '</p>';
+    unset($_SESSION['error']);
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -19,7 +29,7 @@
 
     <main>
         <!-- Formulaire pour entrez son pseudo -->
-        <form action="URL redirection" method="post" class="form-container">
+        <form action="../process/login_process.php" method="post" class="form-container">
             <label for="pseudo_choice">Entrez votre pseudo :</label>
             <input type="text" id="pseudo_choice" name="pseudo" required>
             <br>
