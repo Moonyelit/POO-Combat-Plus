@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header('Location: ../public/homePlayer.php');
             exit;
         } else {
-            header('Location: ../public/choixHero.php');
+            header('Location: ../public/choiceHero.php');
             exit;
         }
     } else {
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($joueurId) {
             $_SESSION['joueur_id'] = $joueurId;
             $_SESSION['pseudo'] = $pseudo;
-            header('Location: ../public/choixHero.php');
+            header('Location: ../public/choiceHero.php');
             exit;
         } else {
             $_SESSION['error'] = 'Erreur lors de la création du joueur. Veuillez réessayer.';

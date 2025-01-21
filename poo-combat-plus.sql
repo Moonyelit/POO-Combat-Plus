@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 21 jan. 2025 à 10:26
+-- Généré le : mar. 21 jan. 2025 à 21:39
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -36,7 +36,18 @@ CREATE TABLE IF NOT EXISTS `choix_hero` (
   PRIMARY KEY (`id`),
   KEY `fk_choix_hero_joueur` (`id_joueur`),
   KEY `fk_choix_hero_hero` (`id_hero`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `choix_hero`
+--
+
+INSERT INTO `choix_hero` (`id`, `id_joueur`, `id_hero`, `nom_personnalise`) VALUES
+(1, 3, 2, 'Nanami'),
+(2, 1, 2, 'Nanami'),
+(3, 2, 1, 'Elminia'),
+(4, 5, 1, 'Kaname'),
+(5, 6, 1, 'Elnia');
 
 -- --------------------------------------------------------
 
@@ -87,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `hero_classe` (
   `malus_force` int DEFAULT '0',
   `boost_defense` int DEFAULT '0',
   `malus_defense` int DEFAULT '0',
-  `description` text COLLATE utf8mb4_general_ci,
+  `description` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_classe_name` (`classe_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -109,9 +120,22 @@ INSERT INTO `hero_classe` (`id`, `classe_name`, `boost_pvmax`, `malus_pvmax`, `b
 
 DROP TABLE IF EXISTS `joueur`;
 CREATE TABLE IF NOT EXISTS `joueur` (
-  `id` int NOT NULL,
-  `pseudo` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Nom du joueur'
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `id` int NOT NULL AUTO_INCREMENT,
+  `pseudo` varchar(15) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `joueur`
+--
+
+INSERT INTO `joueur` (`id`, `pseudo`) VALUES
+(1, 'Luna'),
+(2, 'Testeuse'),
+(3, 'Loki'),
+(4, 'Nakaba'),
+(5, 'Clement'),
+(6, 'Lucas');
 
 -- --------------------------------------------------------
 

@@ -16,7 +16,7 @@ function selectHero(heroName, heroId) {
     document.querySelectorAll('.hero').forEach(el => el.classList.remove('selected'));
 
     // Ajouter la classe 'selected' au héros cliqué
-    document.getElementById(heroName).classList.add('selected');
+    document.getElementById(heroId).classList.add('selected');
 }
 
 // Vérification que le formulaire est soumis avec les bonnes valeurs

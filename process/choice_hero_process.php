@@ -1,7 +1,30 @@
 <?php
 session_start();
-require_once '../utils/autoloader.php';          
+require_once '../utils/autoloader.php';
 
+// Récupérer les héros si ce n'est pas déjà fait
+if (!isset($_SESSION['heroes'])) {
+    $HeroesRepo = new HeroesRepository();
+    $heroes = $HeroesRepo->FindAll();
+
+    // Transformer les objets en tableaux pour éviter les problèmes de sérialisation
+    $heroesArray = [];
+    foreach ($heroes as $hero) {
+        $heroesArray[] = [
+            'id' => $hero->getId(),
+            'nom' => $hero->getNom(),
+            'genre' => $hero->getGenre(),
+            'PV' => $hero->getPV(),
+            'force' => $hero->getForce(),
+            'defense' => $hero->getDefense(),
+        ];
+    }
+
+    // Stocker les héros dans la session
+    $_SESSION['heroes'] = $heroesArray;
+}
+
+// Vérification de la soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['hero_name'])) {
     $heroId = (int) $_POST['hero_id'];
     $heroName = trim($_POST['hero_name']);
@@ -31,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
         exit;
     }
 
-    // Enregistrement du héros dans la table choix_hero
+    // Enregistrement du héros dans la base de données
     $choixHeroRepo->createChoixHero($joueurId, $heroId, $heroName);
 
     $_SESSION['message'] = 'Héros enregistré avec succès !';

@@ -1,33 +1,8 @@
 <?php
 require_once '../process/choice_hero_process.php';
-require_once '../utils/autoloader.php';
 
-// Vérifie si la session est déjà démarrée
-if (session_status() == PHP_SESSION_NONE) {
-    session_start();
-}
-
-// Instance du repository des héros
-$HeroesRepo = new HeroesRepository();
-
-// Récupération des héros depuis la base de données
-$heroes = $HeroesRepo->FindAll();
-
-// Transformer les objets en tableaux pour éviter l'erreur de sérialisation
-$heroesArray = [];
-foreach ($heroes as $hero) {
-    $heroesArray[] = [
-        'id' => $hero->getId(),
-        'nom' => $hero->getNom(),
-        'genre' => $hero->getGenre(),
-        'PV' => $hero->getPV(),
-        'force' => $hero->getForce(),
-        'defense' => $hero->getDefense(),
-    ];
-}
-
-// Stocker la version tableau dans la session
-$_SESSION['heroes'] = $heroesArray;
+// Récupérer les héros stockés en session
+$heroes = $_SESSION['heroes'] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -47,10 +22,11 @@ $_SESSION['heroes'] = $heroesArray;
 
     <div class="hero-container">
         <?php foreach ($heroes as $hero): ?>
-            <div id="<?= $hero->getId(); ?>"
+            <div id="<?= $hero['id']; ?>"
                 class="hero"
-                onclick="selectHero('<?= $hero->getNom() ?>', '<?= $hero->getId(); ?>')">
-                <img src="assets/images/Hero/HERO-<?= $hero->getNom() ?>-Suikoden.png" alt="<?= $hero->getNom() ?>">
+                onclick="selectHero('<?= htmlspecialchars($hero['nom']); ?>', '<?= $hero['id']; ?>')">
+                <img src="assets/images/Hero/HERO-<?= htmlspecialchars($hero['nom']); ?>-Suikoden.png" 
+                     alt="<?= htmlspecialchars($hero['nom']); ?>">
             </div>
         <?php endforeach; ?>
     </div>
@@ -60,7 +36,6 @@ $_SESSION['heroes'] = $heroesArray;
         <label for="hero-name">Renommez votre héros :</label>
         <input type="text" id="hero-name" name="hero_name" placeholder="Choisissez un nom" required>
         <br>
-        <?php var_dump($heroes) ?>
         <input type="submit" value="Valider">
     </form>
 
