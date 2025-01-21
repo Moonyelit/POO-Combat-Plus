@@ -2,25 +2,23 @@
 
 final class Joueur
 {
-    private $id;
+    private int $id;
     private string $pseudo;
 
-
-    //mon contructeur
-
+    // Constructeur pour initialiser les propriétés de l'objet Joueur
     public function __construct(int $id, string $pseudo)
     {
         $this->id = $id;
         $this->pseudo = $pseudo;
     }
 
-    //getter et setter
-
+    // Getter pour l'ID du joueur
     public function getId(): int
     {
         return $this->id;
     }
 
+    // Getter pour le pseudo du joueur
     public function getPseudo(): string
     {
         return $this->pseudo;

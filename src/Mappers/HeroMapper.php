@@ -1,9 +1,8 @@
 <?php
 
-require_once '../utils/autoloader.php';
-
 class HeroMapper
 {
+    // Convertit un tableau de données en objet BaseHero et applique les boosts/malus de la classe
     public static function mapToObject(array $dataHero, ClasseHero $classeHero): BaseHero
     {
         $hero = new class(

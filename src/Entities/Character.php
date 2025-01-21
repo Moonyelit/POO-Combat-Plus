@@ -11,7 +11,7 @@ abstract class Character
     protected int $defense;
     protected ?string $classeName = null;
 
-    // Mon constructeur
+    // Constructeur pour initialiser les propriétés de base du personnage
     public function __construct(
         string $nom, 
         string $genre, 
@@ -20,9 +20,7 @@ abstract class Character
         int $MP = 100, 
         int $MPMax = 100, 
         int $force = 10, 
-        int $defense = 10,      
-
-
+        int $defense = 10
     ) {
         $this->nom = $nom;
         $this->genre = $genre;
@@ -33,7 +31,4 @@ abstract class Character
         $this->force = $force;
         $this->defense = $defense;
     }
-
-
-
 }

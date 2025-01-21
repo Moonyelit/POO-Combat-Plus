@@ -1,6 +1,10 @@
 function selectHero(heroName, heroId) {
+    
+    // Modifier l'input caché avec l'ID du héros sélectionné
     document.getElementById('selected-hero-id').value = heroId;
-    document.getElementById('hero-name').value = heroName;
+
+    // Mettre à jour le placeholder du champ de nom avec le nom du héros sélectionné
+    document.getElementById('hero-name').placeholder = heroName;
 
     // Retirer la classe 'selected' de tous les héros
     document.querySelectorAll('.hero').forEach(el => el.classList.remove('selected'));

@@ -63,23 +63,19 @@ body {
     background-color: #3663a7;
 }
 
-
+/* Responsive styling */
 @media screen and (max-width: 768px) {
     body {
         padding: 0.5rem;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed; 
-        display: flex;
-
-
+        background-attachment: fixed;
     }
 
-.Logo img {
-    width: 20rem;
-    height: auto;
-    margin-bottom: 1rem;
-    
-}
+    .Logo img {
+        width: 20rem;
+        height: auto;
+        margin-bottom: 1rem;
+    }
 }

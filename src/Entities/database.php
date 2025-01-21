@@ -4,6 +4,7 @@ final class Database
 {
     private static ?PDO $pdo = null;
 
+    // Méthode pour obtenir une connexion PDO à la base de données
     public static function getConnection(): PDO
     {
         if (self::$pdo === null){

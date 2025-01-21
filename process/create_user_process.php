@@ -16,12 +16,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
     $heroId = (int) $_POST['hero_id'];
     $nomHero = trim($_POST['hero_name']);
 
-    if ($heroId && $nomHero) {
+    if ($heroId && !empty($nomHero)) {
         $joueurRepo = new JoueurRepository();
         $choixHeroRepo = new ChoixHeroRepository();
 
         // Récupérer l'ID du joueur en session
-        $joueurId = $_SESSION['joueur_id'];
+        $joueurId = $_SESSION['joueur_id'] ?? null;
+
+        if (!$joueurId) {
+            $_SESSION['error'] = 'Erreur: Joueur non trouvé.';
+            header('Location: ../public/home.php');
+            exit;
+        }
 
         // Vérification si le joueur a déjà un héros associé
         $existingChoice = $choixHeroRepo->findByJoueurId($joueurId);

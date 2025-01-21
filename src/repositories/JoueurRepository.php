@@ -7,7 +7,7 @@ final class JoueurRepository extends AbstractRepository
         parent::__construct();
     }
 
-
+    // Trouve un joueur par son pseudo
     public function findByPseudo(string $pseudo): ?Joueur
     {
         $query = $this->pdo->prepare('SELECT * FROM joueur WHERE pseudo = :pseudo');
@@ -21,6 +21,7 @@ final class JoueurRepository extends AbstractRepository
         return JoueurMapper::mapToObject($dataJoueur);
     }
 
+    // Crée un nouveau joueur avec le pseudo donné
     public function create(string $pseudo): ?int
     {
         try {
@@ -37,4 +38,4 @@ final class JoueurRepository extends AbstractRepository
             return null;
         }
     }
-}    
+}

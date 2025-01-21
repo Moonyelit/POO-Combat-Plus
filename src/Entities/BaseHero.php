@@ -4,7 +4,7 @@ abstract class BaseHero extends Character
 {
     protected int $id;
 
-    // Mon constructeur
+    // Constructeur pour initialiser les propriétés de base du héros
     public function __construct(
         int $id, 
         string $nom, 

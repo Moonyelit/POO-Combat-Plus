@@ -1,8 +1,8 @@
 <?php
-require_once '../utils/autoloader.php';
 
 class JoueurMapper
 {
+    // Convertit un tableau de données en objet Joueur
     public static function mapToObject(array $dataJoueur)
     {
         return new Joueur(
@@ -11,6 +11,7 @@ class JoueurMapper
         );
     }
 
+    // Convertit un objet Joueur en tableau de données
     public static function mapToArray(Joueur $joueur)
     {
         return [

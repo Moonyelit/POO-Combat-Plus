@@ -6,9 +6,7 @@ final class HeroesRepository extends AbstractRepository
         parent::__construct();
     }
 
-
-
-    // BASE HERO AVEC SA CLASSE
+    // Récupère tous les héros avec leur classe
     public function FindAll(): array
     {
 
@@ -71,8 +69,7 @@ LIMIT 0, 25;
         return $heroes;
     }
 
-
-    // SELECTION HERO
+    // Récupère un héros par son identifiant
     public function FindOne(int $id): ?BaseHero
     {
         // Requête SQL pour récupérer un héros et sa classe
@@ -135,9 +132,7 @@ LIMIT 0, 25;
         return HeroMapper::mapToObject($heroData, $classeHero);
     }
 
-
-
-    // SAUVER HERO
+    // Sauvegarde un héros par son identifiant
     public function saveHero(int $id): ?BaseHero
     {
         $query = 'INSERT INTO hero (id) VALUES (:id)';

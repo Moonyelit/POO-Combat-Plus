@@ -8,24 +8,25 @@ final class ChoixHeroRepository extends AbstractRepository
         $query->execute(['id' => $joueurId]);
         $data = $query->fetch(PDO::FETCH_ASSOC);
 
-        if (!$data) {
-            return null;
-        }
-
-        return new ChoixHero($data['id'], $data['id_joueur'], $data['id_hero'], $data['nom_personnalise']);
+        return $data ? ChoixHeroMapper::mapToObject($data) : null;
     }
 
     public function createChoixHero(int $joueurId, int $heroId, string $nomPersonnalise): ChoixHero
     {
-        $query = "INSERT INTO choix_hero (id_joueur, id_hero, nom_personnalise) VALUES (:id_joueur, :id_hero, :nom_personnalise)";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindParam(':id_joueur', $joueurId);
-        $stmt->bindParam(':id_hero', $heroId);
-        $stmt->bindParam(':nom_personnalise', $nomPersonnalise);
-        $stmt->execute();
+        $choixHeroData = [
+            'id_joueur' => $joueurId,
+            'id_hero' => $heroId,
+            'nom_personnalise' => $nomPersonnalise,
+        ];
 
-        $id = $this->pdo->lastInsertId();
+        $stmt = $this->pdo->prepare(
+            "INSERT INTO choix_hero (id_joueur, id_hero, nom_personnalise) 
+             VALUES (:id_joueur, :id_hero, :nom_personnalise)"
+        );
+        $stmt->execute($choixHeroData);
 
-        return new ChoixHero($id, $joueurId, $heroId, $nomPersonnalise);
+        $choixHeroData['id'] = $this->pdo->lastInsertId();
+
+        return ChoixHeroMapper::mapToObject($choixHeroData);
     }
 }

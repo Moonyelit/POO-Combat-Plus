@@ -13,6 +13,7 @@ class ClasseHero
     private int $boostDefense;
     private int $malusDefense;
 
+    // Constructeur pour initialiser les propriétés de la classe
     public function __construct(
         int $id,
         string $classeName,

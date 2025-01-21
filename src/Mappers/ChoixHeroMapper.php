@@ -2,6 +2,7 @@
 
 class ChoixHeroMapper
 {
+    // Convertit un tableau de données en objet ChoixHero
     public static function mapToObject(array $data): ChoixHero
     {
         return new ChoixHero(
@@ -12,6 +13,7 @@ class ChoixHeroMapper
         );
     }
 
+    // Convertit un objet ChoixHero en tableau de données
     public static function mapToArray(ChoixHero $choixHero): array
     {
         return [
