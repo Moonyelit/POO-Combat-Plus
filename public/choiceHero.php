@@ -1,4 +1,7 @@
-<?php require_once '../process/auth_check.php'; ?>
+<?php require_once '../process/auth_check.php'; 
+$heroes = $_SESSION['heroes'] ?? [];
+
+?>
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,19 +17,19 @@
 <h1>Choisissez votre héros</h1>
 
 <div class="hero-container">
-    <div id="Riou" class="hero" onclick="selectHero('Riou')">
-        <img src="./assets/images/Hero/HERO-Riou-Suikoden.png" alt="Riou">
-    </div>
-
-    <div id="Nanami" class="hero" onclick="selectHero('Nanami')">
-        <img src="./assets/images/Hero/HERO-Nanami-Suikoden.png" alt="Nanami">
-    </div>
+    <?php var_dump($heroes);
+ foreach ($heroes as $hero): ?>
+        <div id="<?= $hero->getNom(); ?>" class="hero" onclick="selectHero('<?= $hero->getNom(); ?>', '<?= $hero->getId(); ?>')">
+        <img src="./assets/images/Hero/HERO-<?= $hero->getNom(); ?>-Suikoden.png" alt="<?= $hero->getNom(); ?>">
+        </div>
+    <?php endforeach; ?>
 </div>
 
+
 <form action="../process/create_user_process.php" method="post" class="form-container">
-    <input type="hidden" name="hero" id="selected-hero" value="">
+    <input type="hidden" name="hero_id" id="selected-hero" value="">
     <label for="hero-name">Renommez votre héros :</label>
-    <input type="text" id="hero-name" name="hero_name" required>
+    <input type="text" id="hero-name" name="hero_name" placeholder="Choisissez un nom" required>
     <br>
     <input type="submit" value="Valider">
 </form>

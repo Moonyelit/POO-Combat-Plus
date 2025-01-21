@@ -53,7 +53,7 @@ h1 {
     transition: transform 0.5s, border-color 0.3s;
 }
 
-.hero .selected {
+.hero:hover .hero.selected {
     border-color: #171b2c;
     transform: scale(1.1);
 }

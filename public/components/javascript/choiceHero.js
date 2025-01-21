@@ -1,4 +1,4 @@
-function selectHero(heroId, heroName) {
+function selectHero(heroName, heroId) {
     document.getElementById('selected-hero-id').value = heroId;
     document.getElementById('hero-name').value = heroName;
 

@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
         $existingChoice = $choixHeroRepo->findByJoueurId($joueurId);
         if ($existingChoice) {
             $_SESSION['error'] = 'Vous avez déjà un héros.';
-            header('Location: ../public/homePlayer.php');
+            header('Location: ../public/fight.php');
             exit;
         }
 
@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
         $choixHeroRepo->createChoixHero($joueurId, $heroId, $nomHero);
 
         $_SESSION['message'] = 'Héros enregistré avec succès!';
-        header('Location: ../public/homePlayer.php');
+        header('Location: ../public/fight.php');
         exit;
     } else {
         $_SESSION['error'] = 'Veuillez sélectionner un héros et donner un nom.';
