@@ -29,4 +29,22 @@ final class ChoixHeroRepository extends AbstractRepository
 
         return ChoixHeroMapper::mapToObject($choixHeroData);
     }
+
+
+    public function findAll(): array
+{
+    $query = $this->pdo->query("SELECT * FROM choix_hero");
+    $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+    $heroes = [];
+    foreach ($result as $row) {
+        $heroes[] = ChoixHeroMapper::mapToObject($row);
+    }
+
+    return $heroes;
 }
+
+
+
+}
+

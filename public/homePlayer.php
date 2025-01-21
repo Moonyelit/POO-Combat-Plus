@@ -11,7 +11,7 @@ $choixHeroRepo = new ChoixHeroRepository();
 $hero = $choixHeroRepo->findByJoueurId($_SESSION['joueur_id']);
 
 if (!$hero) {
-    header('Location: choiceHero.php');
+    header('Location: choixeHero.php');
     exit;
 }
 

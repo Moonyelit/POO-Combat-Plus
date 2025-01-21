@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
     // Vérification des données reçues
     if (!$joueurId || $heroId <= 0 || empty($heroName)) {
         $_SESSION['error'] = 'Veuillez sélectionner un héros et donner un nom.';
-        header('Location: ../public/choiceHero.php');
+        header('Location: ../public/choixHero.php');
         exit;
     }
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
     $allowedHeroes = [1, 2];
     if (!in_array($heroId, $allowedHeroes)) {
         $_SESSION['error'] = 'Le héros sélectionné n\'est pas valide.';
-        header('Location: ../public/choiceHero.php');
+        header('Location: ../public/choixeHero.php');
         exit;
     }
 

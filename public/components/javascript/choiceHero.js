@@ -1,7 +1,7 @@
 function selectHero(heroName, heroId) {
     const allowedHeroes = ['1', '2']; // Limiter aux héros autorisés (Riou et Nanami)
 
-    if (!allowedHeroes.includes.toString()) {
+    if (!allowedHeroes.includes(heroId)) {
         alert('Ce héros n\'est pas sélectionnable.');
         return;
     }
