@@ -3,23 +3,31 @@
 final class JoueurRepository extends AbstractRepository
 {
     public function __construct()
-        {
-            parent::__construct(); 
-        }
-    
-
-public function findByPseudo(string $pseudo): ?Joueur
-{
-    $query = $this->pdo->prepare('SELECT * FROM joueur WHERE pseudo = :pseudo');
-    $query->execute(['pseudo' => $pseudo]);
-    $dataJoueur = $query->fetch(PDO::FETCH_ASSOC);
-
-    if (!$dataJoueur) {
-        return null;
+    {
+        parent::__construct();
     }
 
-    return JoueurMapper::mapToObject($dataJoueur);
 
+    public function findByPseudo(string $pseudo): ?Joueur
+    {
+        $query = $this->pdo->prepare('SELECT * FROM joueur WHERE pseudo = :pseudo');
+        $query->execute(['pseudo' => $pseudo]);
+        $dataJoueur = $query->fetch(PDO::FETCH_ASSOC);
 
-}
+        if (!$dataJoueur) {
+            return null;
+        }
+
+        return JoueurMapper::mapToObject($dataJoueur);
+    }
+
+    public function create(string $pseudo): int
+    {
+        $query = "INSERT INTO joueur (pseudo) VALUES (:pseudo)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(':pseudo', $pseudo);
+        $stmt->execute();
+
+        return $this->pdo->lastInsertId();
+    }
 }

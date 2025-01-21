@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_name'], $_POST['
         $existingJoueur = $joueurRepo->findByPseudo($pseudo);
 
         if ($existingJoueur) {
-            $_SESSION['error'] = 'Ce pseudo existe déjà, veuillez en choisir un autre.';
+            $_SESSION['.error'] = 'Ce pseudo existe déjà, veuillez en choisir un autre';
             header('Location: ../public/home.php');
             exit;
         }

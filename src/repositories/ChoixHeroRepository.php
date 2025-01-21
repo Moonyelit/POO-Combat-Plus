@@ -12,7 +12,7 @@ final class ChoixHeroRepository extends AbstractRepository
             return null;
         }
 
-        return ChoixHeroMapper::mapToObject($data);
+        return new ChoixHero($data['id'], $data['id_joueur'], $data['id_hero'], $data['nom_personnalise']);
     }
 
     public function createChoixHero(int $joueurId, int $heroId, string $nomPersonnalise): ChoixHero
@@ -24,7 +24,6 @@ final class ChoixHeroRepository extends AbstractRepository
         $stmt->bindParam(':nom_personnalise', $nomPersonnalise);
         $stmt->execute();
 
-        // Récupérer l'ID inséré
         $id = $this->pdo->lastInsertId();
 
         return new ChoixHero($id, $joueurId, $heroId, $nomPersonnalise);

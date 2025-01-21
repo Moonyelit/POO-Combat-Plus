@@ -5,11 +5,11 @@ require_once '../utils/autoloader.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pseudo = trim($_POST['pseudo'] ?? '');
+    $pseudo = trim($_POST['pseudo'] ?? ''); // Nettoyage de la saisie
 
     // Vérification si le champ est vide
     if (empty($pseudo)) {
-        $_SESSION['error'] = 'Veuillez entrer un pseudo valide.';
+        $_SESSION['error'] = 'Veuillez entrer un pseudo.';
         header('Location: ../public/home.php');
         exit;
     }
@@ -26,15 +26,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $choixHeroRepository = new ChoixHeroRepository();
         $choixHero = $choixHeroRepository->findByJoueurId($joueur->getId());
 
-        if($choixHero){
-            //joueur avec déjà un héro enregistré
+        if ($choixHero) {
+            // Joueur avec déjà un héros enregistré
             header('Location: ../public/homePlayer.php');
             exit;
         } else {
-            //joueur sans héro enregistré
+            // Joueur sans héros enregistré
             header('Location: ../public/choiceHero.php');
             exit;
         }
+    } else {
+        // Si le joueur n'existe pas, création d'un nouveau joueur
+        $joueurId = $joueurRepository->create($pseudo);
 
+        if ($joueurId) {
+            $_SESSION['joueur_id'] = $joueurId;
+            $_SESSION['pseudo'] = $pseudo;
+            header('Location: ../public/choiceHero.php');
+            exit;
+        } else {
+            $_SESSION['error'] = 'Erreur lors de la création du joueur.';
+            header('Location: ../public/home.php');
+            exit;
+        }
     }
+} else {
+    echo 'Formulaire non soumis correctement.';
 }
+?>

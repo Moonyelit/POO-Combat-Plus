@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 20 jan. 2025 à 12:36
+-- Généré le : mar. 21 jan. 2025 à 10:26
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -110,7 +110,7 @@ INSERT INTO `hero_classe` (`id`, `classe_name`, `boost_pvmax`, `malus_pvmax`, `b
 DROP TABLE IF EXISTS `joueur`;
 CREATE TABLE IF NOT EXISTS `joueur` (
   `id` int NOT NULL,
-  `nom` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Nom du joueur'
+  `pseudo` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT 'Nom du joueur'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
