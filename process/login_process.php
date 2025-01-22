@@ -24,11 +24,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $choixHero = $choixHeroRepository->findByJoueurId($joueur->getId());
 
         if ($choixHero) {
-            $_SESSION['heroId'] = $choixHero->getId();
+            $_SESSION['heroId'] = $choixHero->getIdHero();
+            
             $_SESSION['heroName'] = $choixHero->getNomPersonnalise();
-            var_dump($_SESSION['heroId']);
-            var_dump($_SESSION['heroName']);
-
+    
             header('Location: ./fight_process.php');
             exit;
         } else {

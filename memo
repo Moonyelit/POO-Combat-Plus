@@ -32,7 +32,7 @@ array (size=6)
           'PV' => int 100
           'force' => int 17
           'defense' => int 12
-  'heroId' => int 6
+  'heroId' => int 1
   'heroName' => string 'Riou' (length=4)
 ❤️ Point de vie / Point de vie Max
 Image d'un monstre FurFur

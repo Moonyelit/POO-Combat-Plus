@@ -4,11 +4,8 @@ require_once '../utils/autoloader.php';
 session_start();
 // session_unset();
 
-// var_dump($_SESSION);
-// die();
 
-
-if (!isset($_SESSION['pseudo']) ||!isset($_SESSION['heroId']) || !isset($_SESSION['joueur_id']) || !isset($_SESSION['heroName']) || !isset($_SESSION['heroes'])) {
+if (!isset($_SESSION['pseudo']) ||!isset($_SESSION['joueur_id']) || !isset($_SESSION['heroName']) || !isset($_SESSION['heroes'])) {
     header('Location: ../public/home.php');
     exit;
 }
@@ -43,6 +40,7 @@ $hero = $_SESSION['heroes'];
 $monster = new FurFur();
 
 $_SESSION['monster'] = $monster;
+
 
 
 // var_dump($monster);

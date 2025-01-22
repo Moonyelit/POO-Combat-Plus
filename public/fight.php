@@ -1,6 +1,15 @@
 <?php
+require_once '../utils/autoloader.php';
+
 session_start();
 
+
+$monster = $_SESSION['monster'];
+$heroName = $_SESSION['heroName'];
+
+var_dump($_SESSION);
+// var_dump($_SESSION['heroName']);
+die();
 ?>
 
 
@@ -25,14 +34,14 @@ session_start();
 
     <div class="fenetre fenetre-1">
         <div>
-            <?= htmlspecialchars($_SESSION['heroName']) ?> ❤️ Point de vie / Point de vie Max
+            <?= htmlspecialchars($monster->getNom())  ?> ❤️ Point de vie / Point de vie Max
         </div>
 
     </div>
 
     <div class="fenetre fenetre-2">
         <div>
-            <?= htmlspecialchars($_SESSION['heroName']) ?> ❤️ Point de vie / Point de vie Max
+            <?= $heroName ?> ❤️ Point de vie / Point de vie Max
         </div>
 
     </div>

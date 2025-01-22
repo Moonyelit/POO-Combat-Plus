@@ -31,4 +31,8 @@ abstract class Character
         $this->force = $force;
         $this->defense = $defense;
     }
+
+
+    //getter
+    public function getNom(): string { return $this->nom; }
 }

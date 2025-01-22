@@ -106,6 +106,9 @@ final class HeroesRepository extends AbstractRepository
 
         $heroData = $stmt->fetch(PDO::FETCH_ASSOC);
 
+        // var_dump($heroData);
+        // die();
+
         if (!$heroData) {
             return null; // Aucun héros trouvé
         }
@@ -118,10 +121,10 @@ final class HeroesRepository extends AbstractRepository
             $heroData['malus_pvmax'],
             $heroData['boost_mpmax'],
             $heroData['malus_mpmax'],
-            $heroData['boostForce'],
-            $heroData['malusForce'],
-            $heroData['boostDefense'],
-            $heroData['malusDefense'],
+            $heroData['boost_force'],
+            $heroData['malus_force'],
+            $heroData['boost_defense'],
+            $heroData['malus_defense'],
             $heroData['description'] ?? ''
         );
 
