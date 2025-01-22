@@ -16,6 +16,8 @@ if (isset($_SESSION['error'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un Héros</title>
     <link rel="stylesheet" href="../public/components/css/home.css">
+    <link rel="stylesheet" href="../public/components/css/style.css">
+
     <script src="../public/components/javascript/home.js"></script>
 </head>
 

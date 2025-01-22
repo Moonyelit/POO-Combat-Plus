@@ -1,7 +1,166 @@
-* {
+html, body {
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    overflow: hidden; /* Empêche tout débordement */
+}
+
+body {
+    background-image: url('../../assets/images/Combat/fight-backgroundHD.png');
+    background-size: cover;
+    background-position: center center; 
+    background-repeat: no-repeat;
 }
 
 
+@font-face {
+    font-family: 'Pixely';
+    src: url('../../assets/font/pixely.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+.fenetre {
+    background-color: rgba(31, 41, 33, 0.7);
+    color: white;
+    font-family: pixely;
+    border-radius: 10px;
+    border: 2px solid #b07330;
+    padding: 15px;
+}
+
+.fenetre-1 {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+.fenetre-2 {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+
+.fenetre-3 {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+}
+
+.monsters {
+    position: absolute;
+    top: 25rem;
+    left: 30rem;
+}
+
+.monsters img {
+    width: auto;
+    height: 5rem;
+}
+
+
+.heroes {
+    position: absolute;
+    bottom: 10rem;
+    right: 20rem;
+}
+
+.heroes img {
+    width: auto;
+    height: 12rem;
+}
+
+
+
+
+
+
+/* Responsive styling */
+@media screen and (max-width: 1550px) {
+    .monsters {
+        position: absolute;
+        top: 20rem;
+        left: 25rem;
+    }
+    
+    .monsters img {
+        width: auto;
+        height: 4rem;
+    }
+    
+    
+    .heroes {
+        position: absolute;
+        bottom: 9rem;
+        right: 20rem;
+    }
+    
+    .heroes img {
+        width: auto;
+        height: 10rem;
+    }
+}
+
+
+@media screen and (max-width: 1235px) {
+    .monsters {
+        position: absolute;
+        top: 20rem;
+        left: 20rem;
+    }
+    
+    .monsters img {
+        width: auto;
+        height: 4rem;
+    }
+    
+    
+    .heroes {
+        position: absolute;
+        bottom: 9rem;
+        right: 15rem;
+    }
+    
+    .heroes img {
+        width: auto;
+        height: 10rem;
+    }
+}
+
+
+@media screen and (max-width: 1050px) {
+    .monsters {
+        position: absolute;
+        top: 20rem;
+        left: 10rem;
+    }
+    
+    .monsters img {
+        width: auto;
+        height: 4rem;
+    }
+    
+    
+    .heroes {
+        position: absolute;
+        bottom: 9rem;
+        right: 10rem;
+    }
+    
+    .heroes img {
+        width: auto;
+        height: 10rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}

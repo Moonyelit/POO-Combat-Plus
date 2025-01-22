@@ -13,6 +13,7 @@ $heroes = $_SESSION['heroes'] ?? [];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer un Héros</title>
     <link rel="stylesheet" href="../public/components/css/choiceHero.css">
+    <link rel="stylesheet" href="../public/components/css/style.css">
     <script src="../public/components/javascript/choiceHero.js" defer></script>
 </head>
 
