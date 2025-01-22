@@ -1,5 +1,5 @@
 <?php
-require_once '../process/choice_hero_process.php';
+session_start();
 
 // Récupérer les héros stockés en session
 $heroes = $_SESSION['heroes'] ?? [];

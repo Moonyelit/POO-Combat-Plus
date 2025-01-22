@@ -5,7 +5,7 @@ require_once '../utils/autoloader.php';
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $pseudo = trim($_POST['pseudo'] ?? ''); 
+    $pseudo = trim($_POST['pseudo'] ?? '');
 
     if (empty($pseudo)) {
         $_SESSION['error'] = 'Veuillez entrer un pseudo.';
@@ -24,7 +24,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $choixHero = $choixHeroRepository->findByJoueurId($joueur->getId());
 
         if ($choixHero) {
-            header('Location: ../public/homePlayer.php');
+            $_SESSION['heroId'] = $choixHero->getId();
+            $_SESSION['heroName'] = $choixHero->getNomPersonnalise();
+            var_dump($_SESSION['heroId']);
+            var_dump($_SESSION['heroName']);
+
+            header('Location: ./fight_process.php');
             exit;
         } else {
             header('Location: ../public/choiceHero.php');
@@ -36,6 +41,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($joueurId) {
             $_SESSION['joueur_id'] = $joueurId;
             $_SESSION['pseudo'] = $pseudo;
+
+            if (!isset($_SESSION['heroes'])) {
+                $HeroesRepo = new HeroesRepository();
+                $heroes = $HeroesRepo->FindAll();
+
+                // Transformer les objets en tableaux pour éviter les problèmes de sérialisation
+                $heroesArray = [];
+                foreach ($heroes as $hero) {
+                    $heroesArray[] = [
+                        'id' => $hero->getId(),
+                        'nom' => $hero->getNom(),
+                        'genre' => $hero->getGenre(),
+                        'PV' => $hero->getPV(),
+                        'force' => $hero->getForce(),
+                        'defense' => $hero->getDefense(),
+                    ];
+                }
+
+                // Stocker les héros dans la session
+                $_SESSION['heroes'] = $heroesArray;
+            }
             header('Location: ../public/choiceHero.php');
             exit;
         } else {
@@ -45,4 +71,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
-?>

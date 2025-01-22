@@ -22,21 +22,22 @@ if (!isset($_SESSION['heroes'])) {
 
     // Stocker les héros dans la session
     $_SESSION['heroes'] = $heroesArray;
+  
 }
 
 // Vérification de la soumission du formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['hero_name'])) {
-    $heroId = (int) $_POST['hero_id'];
-    $heroName = trim($_POST['hero_name']);
-    $joueurId = $_SESSION['joueur_id'] ?? null;
+    $_SESSION["heroId"] = (int) $_POST['hero_id'];
+    $_SESSION["heroName"] = trim($_POST['hero_name']);
+    $_SESSION["joueurId"] = $_SESSION['joueur_id'] ?? null;
 
-    if (!$joueurId) {
+    if (!$_SESSION["joueurId"]) {
         $_SESSION['error'] = 'Erreur de session. Veuillez vous reconnecter.';
         header('Location: ../public/home.php');
         exit;
     }
 
-    if (empty($heroId) || empty($heroName)) {
+    if (empty($_SESSION["heroId"]) || empty($_SESSION["heroName"])) {
         $_SESSION['error'] = 'Veuillez sélectionner un héros et donner un nom.';
         header('Location: ../public/choixHero.php');
         exit;
@@ -46,19 +47,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['hero_id'], $_POST['he
     $choixHeroRepo = new ChoixHeroRepository();
     
     // Vérification si un héros est déjà enregistré pour ce joueur
-    $existingChoice = $choixHeroRepo->findByJoueurId($joueurId);
+    $existingChoice = $choixHeroRepo->findByJoueurId($_SESSION["joueurId"] );
 
     if ($existingChoice) {
         $_SESSION['message'] = 'Vous avez déjà un héros enregistré.';
-        header('Location: ../public/homePlayer.php');
+        header('Location: ../public/fight.php');
         exit;
     }
 
     // Enregistrement du héros dans la base de données
-    $choixHeroRepo->createChoixHero($joueurId, $heroId, $heroName);
+    $choixHeroRepo->createChoixHero($_SESSION["joueurId"] ,  $_SESSION["joueurId"], $_SESSION["heroName"]);
 
     $_SESSION['message'] = 'Héros enregistré avec succès !';
-    header('Location: ../public/homePlayer.php');
+    header('Location: ../public/fight.php');
     exit;
 }
 ?>
